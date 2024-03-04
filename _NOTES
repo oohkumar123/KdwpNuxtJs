@@ -1,0 +1,19 @@
+1. Navbar
+--- component
+--- add to components
+--- js stuff
+
+2. delete unused jsquery scripts
+
+3. tidy up images in public/assets
+
+
+4. fix parallax qualities
+
+convert fetch to useFetch
+
+slowly convert each to composition api
+
+move tech stack stuff jquery
+
+load flicker

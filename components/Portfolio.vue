@@ -1,0 +1,143 @@
+<template>
+    <!-- Portfolio -->
+    <div id="portfolio" class="slide-menu">
+        <div class="container module">
+            
+            <SubComponentsTitle :title='title' :color='color' :classParent='faParent' :classIcon='faIcon'></SubComponentsTitle>
+
+            <div class="content">
+                <SubComponentsSubTitle :subtitle='subtitle' :color='color'></SubComponentsSubTitle>
+                
+                <div class="portfolio-container showbuttons" v-on:click.prevent="setPopUp">
+                    {{ testText }}
+                    <div v-for="value in list" :key="value.id">
+                        {{ value }}
+                    </div>
+                </div>
+
+                <dialog id="favDialog">
+                    <form>
+                        <div>
+                            <button value="cancel" formmethod="dialog">Close</button>
+                        </div>
+                        <img src="" alt="" value="cancel" v-on:click="imageClicked">
+                    </form>
+                </dialog>
+
+            </div>
+        </div>
+    </div>
+</template>
+<script setup>
+
+    let color= ref('darkblue');
+    let title= ref("projects");
+    let subtitle= ref("Below are a few examples of over 700 websites built in the last 15 years.");
+    let faParent= ref('fa-regular');
+    let faIcon= ref('fa-eye');
+    let list = ref([]);
+    let testText = 'hello'
+
+    const page_data = await setPageData(359);
+
+    //Page
+    title = page_data.title.rendered;
+    subtitle = page_data.content.rendered;
+
+    //ACF
+    const jsprojects = page_data.acf.projects;
+
+    const myPromise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(['car1','car2','car3']);
+        }, 5000);
+    });
+    myPromise.then(
+        (value) => {
+            console.log('%cvalue: %o', 'color: red;font-size:12px', value);
+            list = reactive(value);
+            testText = 'kumar'
+        },
+        (error) => {
+            console.error("Promise rejected with error:", error);
+        }
+    );
+    
+
+
+    function setPopUp(item) {
+        const favDialog = document.getElementById("favDialog");
+        favDialog.querySelector('img').src = item.target.dataset.full
+        favDialog.showModal();
+    }
+
+    function imageClicked() {
+        const favDialog = document.getElementById("favDialog");
+        favDialog.close();
+
+    }
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="scss">
+@import '../assets/scss/variables.scss';
+@import '../assets/scss/styles.scss';
+@import '../assets/scss/mixins.scss';
+
+dialog {
+    div {
+        text-align: right;
+        padding-bottom:5px;
+    }
+    img {
+        width:100%; 
+        cursor: pointer;
+    }
+}
+::backdrop {
+    background-color: black;
+    opacity: 0.75;
+}
+
+button {
+    outline: 0;
+    border:0;
+    font-size: 17px;
+}
+
+dialog:modal {
+    overlay: auto !important;
+    padding: 5px;
+}
+
+#portfolio {
+
+    background-color: $white;
+    scroll-margin-top: 50px;
+
+    @media (max-width: $sm) {
+        scroll-margin-top: 136px;
+    }
+
+    .container {
+        padding-bottom: 20px;
+
+        .content {
+            .portfolio-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, 150px);
+                justify-content: center;
+
+                img {
+                    width: 100%;
+                    cursor: pointer;
+                }
+
+                @media (max-width: 500px) {
+                    grid-template-columns: 1fr 1fr;
+                }
+
+            }
+        }
+    }
+}</style>

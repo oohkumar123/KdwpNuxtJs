@@ -1,0 +1,7 @@
+@mixin num() {
+    @for $i from 1 through 20 {
+        .percent-#{$i*5} {
+            width: #{($i*5) + '%'};
+        }
+    }  
+}
