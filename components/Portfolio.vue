@@ -9,9 +9,8 @@
                 <SubComponentsSubTitle :subtitle='subtitle' :color='color'></SubComponentsSubTitle>
                 
                 <div class="portfolio-container showbuttons" v-on:click.prevent="setPopUp">
-                    {{ testText }}
-                    <div v-for="value in list" :key="value.id">
-                        {{ value }}
+                    <div v-for="{source_url, id} in image_data" :key="id">
+                        <img :src="source_url" :data-full="source_url">
                     </div>
                 </div>
 
@@ -32,13 +31,13 @@
 
     let color= ref('darkblue');
     let title= ref("projects");
-    let subtitle= ref("Below are a few examples of over 700 websites built in the last 15 years.");
+    let subtitle= ref("Below are a few examples of over websites and projects built in the last 15 years.");
     let faParent= ref('fa-regular');
     let faIcon= ref('fa-eye');
-    let list = ref([]);
-    let testText = 'hello'
+    let list = [];
 
-    const page_data = await setPageData(359);
+    const props = defineProps(['data'])
+    const page_data = props.data;
 
     //Page
     title = page_data.title.rendered;
@@ -46,24 +45,15 @@
 
     //ACF
     const jsprojects = page_data.acf.projects;
+    let myList = [];
 
-    const myPromise = new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(['car1','car2','car3']);
-        }, 5000);
-    });
-    myPromise.then(
-        (value) => {
-            console.log('%cvalue: %o', 'color: red;font-size:12px', value);
-            list = reactive(value);
-            testText = 'kumar'
-        },
-        (error) => {
-            console.error("Promise rejected with error:", error);
-        }
-    );
+    for (let i in jsprojects) {
+        myList.push(jsprojects[i].field_62fbf8a4b071e);
+    }
     
-
+    const url = `https://kumardesai.com/wp-json/wp/v2/media?include=${myList.join(',')}&per_page=100`;
+    const response_img = await fetch(url);
+    const image_data = await response_img.json();
 
     function setPopUp(item) {
         const favDialog = document.getElementById("favDialog");
@@ -80,9 +70,6 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-@import '../assets/scss/variables.scss';
-@import '../assets/scss/styles.scss';
-@import '../assets/scss/mixins.scss';
 
 dialog {
     div {

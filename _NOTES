@@ -1,19 +1,7 @@
-1. Navbar
---- component
---- add to components
---- js stuff
-
-2. delete unused jsquery scripts
-
+1. tidy up and refactor
+2. delete unused jQuery scripts
 3. tidy up images in public/assets
-
-
-4. fix parallax qualities
-
-convert fetch to useFetch
-
-slowly convert each to composition api
-
-move tech stack stuff jquery
-
-load flicker
+4. convert fetch to useFetch
+5. create engineering page and remove unwanted sections
+6. fix hydration issues
+ 

@@ -29,7 +29,8 @@ let list = [];
 let faParent = ref('fa-regular');
 let faIcon = ref('fa-address-card');
 
-const page_data = await setPageData(59);
+const props = defineProps(['data'])
+const page_data = props.data;
 
 //Page
 title = page_data.title.rendered;

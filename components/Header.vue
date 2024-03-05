@@ -21,10 +21,15 @@
 </template>
 
 <script setup>
+    import { usePageStore } from '@/store'
+    const store = usePageStore();
+    await store.getAllData();
+    
     let name = ref('');
     let description = ref('');
-    
-    const page_data = await setPageData();
+    const response = await fetch("https://www.kumardesai.com/wp-json");
+    const page_data = await response.json();
+
     description = page_data.description;
     name = page_data.name;
 </script>

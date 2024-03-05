@@ -24,7 +24,8 @@ let faIcon = ref('fa-kitchen-set');
 let list = ref([]);
 let services = ''
 
-const page_data = await setPageData(42);
+const props = defineProps(['data'])
+const page_data = props.data;
 
 //Page
 title = page_data.title.rendered;

@@ -17,7 +17,6 @@ let faParent = ref('fa-solid');
 let faIcon = ref('fa-robot');
 let color = 'darkblue';
 let list = [];
-let img = '';
 let coding_skills = '';
 let bgColor = [
     "#1d1d33",
@@ -33,8 +32,8 @@ let bgColor = [
     "#EAC305",
     "#FFD400",
 ]; 
-
-const page_data = await setPageData(319);
+const props = defineProps(['data'])
+const page_data = props.data;
 
 //Page
 title = page_data.title.rendered;

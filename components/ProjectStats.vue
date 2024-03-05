@@ -22,7 +22,8 @@ let faParent = ref('fa-solid');
 let faIcon = ref('fa-display');
 let project_stats = '';
 
-const page_data = await setPageData(292);
+const props = defineProps(['data'])
+const page_data = props.data;
 
 //Page
 title = page_data.acf.title;

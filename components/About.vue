@@ -6,22 +6,22 @@
         
         <div class="content">
             <div class="image"><img v-bind:src="img"/></div>
-            <div class="text" v-html="bio"></div>
+            <div class="text" v-html="content"></div>
         </div>
     </div>
 </template>
 
 <script setup>
+    const props = defineProps(['data']);
+    const page_data = props.data;
+
+    let title = page_data.title.rendered;
+    let content = page_data.content.rendered;
+
     const color = ref('darkblue');
-    let bio = ref('');
-    let title = ref('');
     let img = ref('/assets/images/me-port.jpg');
     let faParent = ref('fa-regular');
     let faIcon = ref('fa-eye');
-
-    const page_data = await setPageData(35);
-    title = page_data.title.rendered;
-    bio = page_data.content.rendered;
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

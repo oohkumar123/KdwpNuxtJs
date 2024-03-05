@@ -1,9 +1,9 @@
-import { useMainStore } from '~/store'
+import { usePageStore } from '~/store'
 
 export default defineNuxtPlugin(({ $pinia }) => {
   return {
     provide: {
-      store: useMainStore($pinia)
+      store: usePageStore($pinia)
     }
   }
 })

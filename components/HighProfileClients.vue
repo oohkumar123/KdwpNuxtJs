@@ -23,7 +23,8 @@
     let faParent=ref('fa-solid');
     let faIcon=ref('fa-building');
     
-    const page_data = await setPageData(45);
+    const props = defineProps(['data'])
+    const page_data = props.data;
     
     //Page
     title = page_data.title.rendered;

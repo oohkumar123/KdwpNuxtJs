@@ -33,7 +33,8 @@ let awesome = ref(true);
 let faParent = ref('fa-solid');
 let faIcon = ref('fa-star');
 
-const page_data = await setPageData(329);
+const props = defineProps(['data'])
+const page_data = props.data;
 title = page_data.title.rendered
 subtitle = page_data.content.rendered
 const employer = page_data.acf.employer

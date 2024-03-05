@@ -14,10 +14,12 @@
 </template>
 
 <script setup>
-let list = ref([]);
-const page_data = await setPageData(284);
+const props = defineProps(['data'])
+
+const page_data = props.data;
 const qualities = page_data.acf.quality;
 
+let list = ref([]);
 list = qualities.map((item, i)=>{ 
     return {
         id: i, 
