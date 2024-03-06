@@ -12,12 +12,13 @@
 
 
 <script setup>
-let title = ref('');
+const props = defineProps(['data'])
+const page_data = props.data;
+
+let title = ref(page_data.title.rendered);
 let faParent = ref('fa-solid');
 let faIcon = ref('fa-robot');
 let color = 'darkblue';
-let list = [];
-let coding_skills = '';
 let bgColor = [
     "#1d1d33",
     "#322E2E",
@@ -32,15 +33,8 @@ let bgColor = [
     "#EAC305",
     "#FFD400",
 ]; 
-const props = defineProps(['data'])
-const page_data = props.data;
 
-//Page
-title = page_data.title.rendered;
-coding_skills = page_data.acf.coding_skills;
-
-//ACF
-list = coding_skills.map((item, i)=>{ 
+let list = page_data.acf.coding_skills.map((item, i)=>{ 
     return {
         name: item.field_62eae81596744,
         link: '#',
@@ -48,6 +42,7 @@ list = coding_skills.map((item, i)=>{
         backgroundColor: bgColor[i % 12]
     }
 });
+
 onMounted(() => {
     $(document).ready(() => {
         let options = {

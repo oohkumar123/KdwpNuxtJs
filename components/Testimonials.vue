@@ -1,6 +1,6 @@
 <template>
     <!-- Testimonials -->
-    <div id="testimonials" class="parallax-testimonials" style="background-image: url(/assets/images/parallax-main.jpg); background-position: 50% 50%">
+    <div id="testimonials" class="parallax-testimonials">
         <div class="container module">
                 
             <SubComponentsTitle :title='title' :color='color' :classParent='faParent' :classIcon='faIcon'></SubComponentsTitle>
@@ -24,29 +24,21 @@
 </template>
 
 <script setup>
-let color = ref('white');
-let title = ref("");
-let subtitle = ref("");
-let list = [];
-let faParent = ref('fa-regular');
-let faIcon = ref('fa-thumbs-up');
+const props = defineProps(['data'])
+const page_data = props.data;
 
-const page_data = await setPageData(53);
+const title = ref(page_data.title.rendered);
+const subtitle = ref(page_data.content.rendered);
+const color = ref('white');
+const faParent = ref('fa-regular');
+const faIcon = ref('fa-thumbs-up');
 
-//Page
-page_data.title.rendered
-page_data.content.rendered
+let list = page_data.acf.testimonials.map((item, i)=>({ 
+    id: i, 
+    author: item.field_52e5ce5dc31f8,        
+    quote: item.field_52e5ce52c31f7
+}))
 
-//ACF
-const testimonials = page_data.acf.testimonials
-for (let i in testimonials) {
-    list.push({ 
-        id: i, 
-        author: testimonials[i].field_52e5ce5dc31f8,        
-        quote: testimonials[i].field_52e5ce52c31f7
-
-    })
-}
 onMounted(() => {
     $(document).ready(() => {
         $(".rslides-testimonials").responsiveSlides({
@@ -67,6 +59,7 @@ onMounted(() => {
     background-color: $darkblue;
     
     &.parallax-testimonials {
+        background-image: url(/assets/images/parallax-main.jpg); 
         background-size: cover;
         background-position: 100% center;
         background-color: $lightblue;

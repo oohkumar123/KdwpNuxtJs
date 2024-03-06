@@ -16,6 +16,14 @@ export default {
 .title {
     text-align: center;
     padding: 7px 20px 0 20px;
+    
+    @media (max-width: $lg) {
+        padding: 7px 20px 20px 20px;
+    }
+    
+    @media (max-width: $sm) {
+        padding: 7px 20px 12px 20px;
+    }
 
     &.darkblue {
         color: $lightblue;

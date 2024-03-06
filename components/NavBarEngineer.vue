@@ -2,11 +2,10 @@
     <div id="navigation" class="container-fluid">
         <div class="navbar-new container">
             <a href="#about">About Me</a>
-            <a href="#range-of-skills">Skills</a> 
-            <a href="#portfolio">Portfolio</a> 
-            <a href="#high-profile-clients">High Profile Projects</a> 
             <a href="#resume">Resume</a> 
-            <a href="#testimonials">Testimonials</a> 
+            <a href="#tech_stack">Tech Stack </a>
+            <a href="#github">GitHub</a> 
+            <a href="#portfolio">Portfolio</a> 
             <a href="#contact">Contact</a>
         </div>  
     </div>
@@ -40,7 +39,7 @@ body:has(.fixed-nav) {
     
     .navbar-new {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-between;
         font-size: 18px;
         color: white;
         padding:0;

@@ -13,30 +13,22 @@
     </div>
 </template>
 
-
 <script setup>
-let color = ref('darkblue');
-let title = ref('');
-let list = ref([]);
-let faParent = ref('fa-solid');
-let faIcon = ref('fa-display');
-let project_stats = '';
-
 const props = defineProps(['data'])
 const page_data = props.data;
 
-//Page
-title = page_data.acf.title;
+let color = ref('darkblue');
+let title = ref(page_data.acf.title);
+let faParent = ref('fa-solid');
+let faIcon = ref('fa-display');
 
-//ACF
-project_stats = page_data.acf.project_stats;
-list = project_stats.map((item, i)=>{ 
-    return {
+let list = page_data.acf.project_stats.map((item, i)=>(
+    {
         id: i, 
         data_perc: item.field_62e9a6795bbee, 
         title: item.field_62e9a6805bbef      
     }
-});
+));
     
 onMounted(() => {
     $(document).ready(() => {

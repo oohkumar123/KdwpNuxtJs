@@ -1,6 +1,6 @@
 <template>
     <!-- High Profile Clients -->
-    <div id="high-profile-clients" class="parallax-high-profile" style="background-image: url(/assets/images/parallax-main.jpg);background-position: 50% 0px;">
+    <div id="high-profile-clients" class="parallax-high-profile">
         <div class="container module">
                 
             <SubComponentsTitle :title='title' :color='color' :classParent='faParent' :classIcon='faIcon'></SubComponentsTitle>
@@ -16,30 +16,39 @@
     </div>
 </template>
 <script setup>
-    let color=ref('white');
-    let title=ref('');
-    let subtitle=ref('');
-    let list=[];
-    let faParent=ref('fa-solid');
-    let faIcon=ref('fa-building');
-    
     const props = defineProps(['data'])
     const page_data = props.data;
-    
-    //Page
-    title = page_data.title.rendered;
-    subtitle = page_data.content.rendered;
 
-    //ACF
-    const client_image = page_data.acf.client_image;
-    for (let i in client_image) {
-        const response_img = await fetch ("https://www.kumardesai.com/wp-json/wp/v2/media/" + page_data.acf.client_image[i])
-        const image_data = await response_img.json();
+    const title = ref(page_data.title.rendered);
+    const subtitle = ref(page_data.content.rendered);
+    const color = ref('white');
+    const faParent = ref('fa-solid');
+    const faIcon = ref('fa-building');
+    let response_img = '';
+    let image_data = '';
+    let list = [];
+    
+    for (let i in page_data.acf.client_image) {
+        response_img = await fetch ("https://www.kumardesai.com/wp-json/wp/v2/media/" + page_data.acf.client_image[i])
+        image_data = await response_img.json();
         list.push({ 
             id: i, 
             img: image_data.source_url 
         })
     }
+    
+    // let list = page_data.acf.client_image.map(async (item, i)=>{
+    //     response_img = await fetch ("https://www.kumardesai.com/wp-json/wp/v2/media/" + item)
+    //     image_data = await response_img.json();
+    //     return { 
+    //         id: i, 
+    //         img: image_data.source_url 
+    //     }
+    // })
+    // console.log('%clist: %o', 'color: red;font-size:12px', list);
+    // list = ref(list)
+    
+    
     onMounted(() => {
         $(document).ready(() => {
             $(".client-carousel").flexisel({
@@ -57,10 +66,10 @@
     background-color: $darkblue;
     
     &.parallax-high-profile {
+        background-image: url(/assets/images/parallax-main.jpg); 
         background-size: cover;
         background-position: 100% center;
         background-color: $lightblue;
-        background-attachment: fixed;
     }
     .content {
 

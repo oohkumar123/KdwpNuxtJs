@@ -36,81 +36,81 @@
 </template>
 
 <script setup>
+const props = defineProps(['data'])
+const page_data = props.data;
 
-let color=ref("darkblue");
-let title=ref('');
-let subtitle=ref('');
-let list=[];
-let faParent=ref('fa-brands');
-let faIcon= ref('fa-github');
-let project=ref([
+const title = ref(page_data.title.rendered);
+const subtitle = ref(page_data.content.rendered);
+const color = ref("darkblue");
+const faParent = ref('fa-brands');
+const faIcon = ref('fa-github');
+const project = ref([
     {
-        "image": "/assets/images/temp1.jpg",
+        "image": "/assets/images/github_weather.jpg",
         "title": "Weather Dashboard",
         "description": "Retrieves data from the Open Weather Map service via API calls. The data is parsed and presented using a dashboard theme. Graphs and diagrams are taken from a jQuery library and integrated into the Vue framework.",
         "demo": "https://oohkumar123.github.io/WeatherDashboardVueJs/",
         "github": "https://github.com/oohkumar123/WeatherDashboardVueJs",
-        "techstack": ["VueJS", "Vuex", "Open Weather Map API", "Options API", "Javascript", "CSS", "SCSS", "Webpack", "NodeJs", "jQuery"],
+        "techstack": ["VueJS", "Vuex", "Open Weather Map API", "Options API", "jQuery"],
         "logo": "/assets/images/vue.png"
     },
     {
-        "image": "/assets/images/temp2.jpg",
+        "image": "/assets/images/github_tictactoe.jpg",
         "title": "TicTacToe",
         "description": "Simple game interface comprised of various components. I use Vuex to keep track of game data - the score, winners, losers, overall player status.",
         "demo": "https://oohkumar123.github.io/TicTacToeVueJs/",
         "github": "https://github.com/oohkumar123/TicTacToeVueJs",
-        "techstack": ["VueJS", "Vuex", "Options API", "Javascript", "CSS", "SCSS", "Webpack", "NodeJs"],
+        "techstack": ["VueJS", "Vuex", "Options API", "Javascript", "CSS", "SCSS"],
         "logo": "/assets/images/vue.png"
     },
     {
-        "image": "/assets/images/temp3.jpg",
+        "image": "/assets/images/github_shoppingcart.jpg",
         "title": "Shopping Cart",
         "description": "Simple shopping cart that leverages Vue Router to allow the user to navigate through a product purchase.",
         "demo": "https://oohkumar123.github.io/ShoppingCartVueJs/",
         "github": "https://github.com/oohkumar123/ShoppingCartVueJs",
-        "techstack": ["VueJS", "Vuex", "Vue Router", "Options API", "Javascript", "CSS", "SCSS", "Webpack", "NodeJs"],
+        "techstack": ["VueJS", "Vuex", "Vue Router", "Options API"],
         "logo": "/assets/images/vue.png"
     },
     {
-        "image": "/assets/images/temp4.jpg",
+        "image": "/assets/images/github_journeyplanner.jpg",
         "title": "Journey Planner",
         "description": "Accesses Google Maps API to send requests and retrieves map data to draw upon the map. Data is managed via Vuex which sends and retrieves data from different components",
         "demo": "https://oohkumar123.github.io/JourneyPlannerVueJs/",
         "github": "https://github.com/oohkumar123/JourneyPlannerVueJs",
-        "techstack": ["VueJS", "Vuex", "Options API", "Google Maps API", "Javascript", "CSS", "SCSS", "Webpack", "NodeJs"],
+        "techstack": ["VueJS", "Vuex", "Options API", "Google Maps API"],
         "logo": "/assets/images/vue.png"
     },
     {
-        "image": "/assets/images/temp5.png",
+        "image": "/assets/images/github_jobtracker.png",
         "title": "Job Application Tracker",
         "description": "An applicaton to track job applications. Built in Express JS, using an Express templating system and connected to MongoDB",
         "demo": "https://lazy-duck-hose.cyclic.app/login",
         "github": "https://github.com/oohkumar123/JobHuntExpressJS",
-        "techstack": ["Express Js", "MongoDB ", "EJS templates", "Javascript", "CSS", "SCSS", "NodeJs", "Docker"],
+        "techstack": ["Express Js", "MongoDB ", "EJS templates", "NodeJs"],
         "logo": "/assets/images/express.png"
+    },
+    {
+        "image": "/assets/images/github_kdwp.png",
+        "title": "KDWP Portfolio",
+        "description": "My portfolio website. Built using the Nuxt framework, and employing Pinia for state management. The site was rebuilt to take advantage of server side rendering and uses the WordPress Rest API to manage content",
+        "demo": "https://www.kumardesai.com/",
+        "github": "https://github.com/oohkumar123/KdwpNuxtJs",
+        "techstack": ["Nuxt", "Composition API", "Server Side Rendering", "Pinia State Management", "WordPress API"],
+        "logo": "/assets/images/nuxt.png"
     }
 ]);
 
-const page_data = await setPageData(343);
-
-//Page
-title = page_data.title.rendered;
-subtitle = page_data.content.rendered;
-
-//ACF
-const jsProject = project.value;
-for (let i in jsProject) {
-    list.push({
-        id: i,
-        image: jsProject[i].image,
-        title: jsProject[i].title,
-        description: jsProject[i].description,
-        demo: jsProject[i].demo,
-        github: jsProject[i].github,
-        techstack: jsProject[i].techstack,
-        logo: jsProject[i].logo
-    })
-}
+let list = project.value.map((item, i)=>({
+    id: i,
+    image: item.image,
+    title: item.title,
+    description: item.description,
+    demo: item.demo,
+    github: item.github,
+    techstack: item.techstack,
+    logo: item.logo
+}))
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -243,7 +243,7 @@ for (let i in jsProject) {
                         }
 
                         p {
-                            font-size: 14px;
+                            font-size: 16px;
                         }
 
                     }

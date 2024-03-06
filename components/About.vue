@@ -15,16 +15,14 @@
     const props = defineProps(['data']);
     const page_data = props.data;
 
-    let title = page_data.title.rendered;
-    let content = page_data.content.rendered;
-
+    const title = ref(page_data.title.rendered);
+    const content = ref(page_data.content.rendered);
     const color = ref('darkblue');
-    let img = ref('/assets/images/me-port.jpg');
-    let faParent = ref('fa-regular');
-    let faIcon = ref('fa-eye');
+    const img = ref('/assets/images/me-port.jpg');
+    const faParent = ref('fa-regular');
+    const faIcon = ref('fa-eye');
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
 #about {
     background-color: $white;

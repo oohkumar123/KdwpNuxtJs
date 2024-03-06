@@ -9,13 +9,10 @@
 </template>
 
 <script setup>
-let title = ref('KDWP Web Programming.');
-let profile_link = ref('http://www.linkedin.com/pub/kumar-desai/3/361/9b6');
-let year = ref('2022');
-let list = [];
-
+const title = ref('KDWP Web Programming.');
+const profile_link = ref('http://www.linkedin.com/pub/kumar-desai/3/361/9b6');
 const date = new Date();
-year = date.getFullYear();
+const year = ref(date.getFullYear());
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

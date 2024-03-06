@@ -28,28 +28,18 @@
     </div>
 </template>
 <script setup>
-
-    let color= ref('darkblue');
-    let title= ref("projects");
-    let subtitle= ref("Below are a few examples of over websites and projects built in the last 15 years.");
-    let faParent= ref('fa-regular');
-    let faIcon= ref('fa-eye');
-    let list = [];
-
     const props = defineProps(['data'])
     const page_data = props.data;
 
-    //Page
-    title = page_data.title.rendered;
-    subtitle = page_data.content.rendered;
+    const title = ref(page_data.title.rendered);
+    const subtitle = ref(page_data.content.rendered);
+    const color = ref('darkblue');
+    const faParent = ref('fa-regular');
+    const faIcon = ref('fa-eye');
 
     //ACF
     const jsprojects = page_data.acf.projects;
-    let myList = [];
-
-    for (let i in jsprojects) {
-        myList.push(jsprojects[i].field_62fbf8a4b071e);
-    }
+    let myList = jsprojects.map((item)=>item.field_62fbf8a4b071e)
     
     const url = `https://kumardesai.com/wp-json/wp/v2/media?include=${myList.join(',')}&per_page=100`;
     const response_img = await fetch(url);

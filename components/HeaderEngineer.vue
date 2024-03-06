@@ -8,7 +8,7 @@
                 <img src="/assets/images/line.png" />
             </div>
 
-            <p class="my-name">{{ name }}</p>
+            <p class="my-name">Kumar Desai</p>
 
             <p class="my-description" v-html="description"></p>
 
@@ -24,7 +24,7 @@
     const props = defineProps(['data'])
     const page_data = props.data;
     const name = ref(page_data.name);
-    const description = ref(page_data.description);
+    const description = ref('Full Stack Web Developer<br>Front End Engineer');
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

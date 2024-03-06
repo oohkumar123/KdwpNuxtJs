@@ -25,22 +25,17 @@
 </template>
 
 <script setup>
-const count = ref(0)
-let color = ref('white');
-let title = ref('');
-let subtitle = ref('');
-let awesome = ref(true);
-let faParent = ref('fa-solid');
-let faIcon = ref('fa-star');
-
 const props = defineProps(['data'])
 const page_data = props.data;
-title = page_data.title.rendered
-subtitle = page_data.content.rendered
-const employer = page_data.acf.employer
 
-let list = employer.map((item, i)=>{ 
-    return {
+const title = ref(page_data.title.rendered);
+const subtitle = ref(page_data.content.rendered);
+const color = ref('white');
+const faParent = ref('fa-solid');
+const faIcon = ref('fa-star');
+
+const list = page_data.acf.employer.map((item, i)=>(
+    {
         id: i, 
         company: item.field_62eaf95af9e7d,        
         date: item.field_62eaf963f9e7e,        
@@ -51,8 +46,7 @@ let list = employer.map((item, i)=>{
         description: item.field_6307ba0ea2372,
         showHide: false
     }
-});
-list = ref(list);
+));
 
 function showDesc(el) {
     try {
@@ -64,7 +58,7 @@ function showDesc(el) {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style  lang="scss">
+<style scoped lang="scss">
 #resume {
     scroll-margin-top: 50px;
     background-color: $darkblue;

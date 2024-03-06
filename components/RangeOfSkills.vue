@@ -17,30 +17,23 @@
 </template>
  
 <script setup>
-let color = ref('white');
-let title = ref('Range of Skills');
-let faParent = ref('fa-solid');
-let faIcon = ref('fa-kitchen-set');
-let list = ref([]);
-let services = ''
-
 const props = defineProps(['data'])
 const page_data = props.data;
 
-//Page
-title = page_data.title.rendered;
+let color = ref('white');
+let title = ref(page_data.title.rendered);
+let faParent = ref('fa-solid');
+let faIcon = ref('fa-kitchen-set');
 
-//ACF
-services = page_data.acf.services;
-
-list = services.map((item, i)=>{ 
-    return {
+let list = page_data.acf.services.map((item, i)=>( 
+    {
         id: i, 
         data_icon: item.field_62eac54bbb81c, 
         title: item.field_52e5c83b7909b,          
         description: item.field_52e5c8437909c
     }
-});
+));
+
 </script>
 
 <style lang="scss">

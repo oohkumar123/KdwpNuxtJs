@@ -22,34 +22,24 @@
 </template>
 
 <script setup>
-let color = ref('darkblue');
-let title = ref('Contact Me');
-let subtitle = ref("You can reach me by the<span> </span>methods listed below:");
-let list = [];
-let faParent = ref('fa-regular');
-let faIcon = ref('fa-address-card');
-
 const props = defineProps(['data'])
 const page_data = props.data;
 
-//Page
-title = page_data.title.rendered;
-subtitle = page_data.content.rendered;
+const title = ref(page_data.title.rendered);
+const subtitle = ref(page_data.content.rendered);
+const color = ref('darkblue');
+const faParent = ref('fa-regular');
+const faIcon = ref('fa-address-card');
 
-//ACF
-const contact_methods = page_data.acf.contact_methods;
-for (let i in contact_methods) {
-    list.push({ 
-        id: i, 
-        method: contact_methods[i].field_62fc0e8b05d29,        
-        icon: contact_methods[i].field_62fc0e9d05d2a,
-        info: contact_methods[i].field_62fc0ea305d2b
+let list = page_data.acf.contact_methods.map((item, i)=>({ 
+    id: i, 
+    method: item.field_62fc0e8b05d29,        
+    icon: item.field_62fc0e9d05d2a,
+    info: item.field_62fc0ea305d2b
+}))
 
-    })
-}
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
 #contact {
     background-color: $white;

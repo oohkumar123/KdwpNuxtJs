@@ -1,6 +1,6 @@
 <template>
     <!-- Qualities -->
-    <div id="qualities" class="parallax-qualities" style="background-image: url(/assets/images/parallax-main.jpg); background-position: 50% 0px;">
+    <div id="qualities" class="parallax-qualities">
         <div class="container module">
             <div class="content">
                 <div class="info-box" v-for="value in list" :key="value.id">
@@ -15,29 +15,26 @@
 
 <script setup>
 const props = defineProps(['data'])
-
 const page_data = props.data;
-const qualities = page_data.acf.quality;
 
-let list = ref([]);
-list = qualities.map((item, i)=>{ 
-    return {
+let list = page_data.acf.quality.map((item, i)=>(
+    {
         id: i, 
         data_icon: item.field_62e99f1d7a348, 
         title: item.field_62e99f267a349,          
         quality: item.field_62e99f2e7a34a
     }
-});
+));
+
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
 #qualities {
     &.parallax-qualities {
+        background-image: url(/assets/images/parallax-main.jpg); 
         background-size: cover;
         background-position: 100% center;
         background-color: $lightblue;
-        background-attachment: fixed;
     }
 
     .content {
